@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java Blogs</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <img src="/images/java-logo.png" alt="Java Logo" width="80">
+        <span>Java Blog</span>
+      </div>
+      <div>
+        <% if (user) { %>
+          <span>Hello, <%= user %>!</span>
+          <a href="/logout">Logout</a>
+          <a href="/blogs/new">New Post</a>
+        <% } else { %>
+          <a href="/login">Login</a>
+          <a href="/register">Register</a>
+        <% } %>
+        <label class="theme-switch">
+          <input type="checkbox" id="modeToggle">
+        </label>
+      </div>
+    </div>
+    <!-- page contained  Goes here -->
+  <div class="container">
+    <div class="navbar">
+      <h1>Java Blog</h1>
+      <div>
+        <% if (user) { %>
+          <span>Hello, <%= user %>!</span>
+          <a href="/logout">Logout</a> |
+          <a href="/blogs/new">New Post</a>
+        <% } else { %>
+          <a href="/login">Login</a> |
+          <a href="/register">Register</a>
+        <% } %>
+      </div>
+    </div>
+
+    <h2>All Posts</h2>
+    <ul class="blog-list">
+      <% blogs.forEach(blog => { %>
+        <li>
+          <a href="/blogs/<%= blog.id %>"><%= blog.title %></a>
+          <% if (blog.author === user) { %>
+            - <a href="/blogs/<%= blog.id %>/delete" onclick="return confirm('Delete?')">🗑️</a>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+<script src="/script.js"></script>
+
+</html>
